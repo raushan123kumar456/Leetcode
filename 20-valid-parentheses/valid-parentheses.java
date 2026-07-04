@@ -1,28 +1,30 @@
 class Solution {
     public boolean isValid(String s) {
-         String op="([{";
-         String clo=")]}";
-        Stack<Character>stack=new Stack<>();
-        for(char c:s.toCharArray())
+        Stack<Character> stack=new Stack<>();
+        String op="({[";
+        String cl=")}]";
+
+        for(int i=0;i<s.length();i++)
         {
-            if(op.indexOf(c)>=0)
+            char ch=s.charAt(i);
+            if(op.indexOf(ch)>=0)
             {
-                stack.push(c);
+                stack.push(ch);
             }
-            else if(clo.indexOf(c)>=0)
-            {  
+            else if(cl.indexOf(ch)>=0)
+            {
                 if(stack.isEmpty())
                 {
                     return false;
                 }
-                if(op.indexOf(stack.pop())!=clo.indexOf(c))
+                else if(op.indexOf(stack.pop())!=cl.indexOf(ch))
                 {
                     return false;
                 }
             }
+            
         }
         return stack.isEmpty();
-
-    
+        
     }
 }
